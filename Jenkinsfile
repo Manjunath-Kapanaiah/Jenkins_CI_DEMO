@@ -5,6 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code...'
+                git 'https://github.com/Manjunath-Kapanaiah/JAVA_CI_DEMO.git'
                 checkout scm
             }
         }
@@ -12,21 +13,21 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the project...'
-                sh 'mvn clean compile'
+                bat 'mvn clean compile'
             }
         }
         
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
         
         stage('Package') {
             steps {
                 echo 'Packaging the application...'
-                sh 'mvn package'
+                bat 'mvn package'
             }
         }
     }
