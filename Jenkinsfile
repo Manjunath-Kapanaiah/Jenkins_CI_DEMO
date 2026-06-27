@@ -1,6 +1,10 @@
 pipeline {
     agent any
-    
+
+    tools {
+        maven 'mymaven'   // must match the exact name in Jenkins Global Tool Config
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,21 +12,21 @@ pipeline {
                 checkout scm
             }
         }
-        
+
         stage('Build') {
             steps {
                 echo 'Building the project...'
                 bat 'mvn clean compile'
             }
         }
-        
+
         stage('Test') {
             steps {
                 echo 'Running tests...'
                 bat 'mvn test'
             }
         }
-        
+
         stage('Package') {
             steps {
                 echo 'Packaging the application...'
@@ -30,7 +34,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             echo 'Pipeline execution completed.'
